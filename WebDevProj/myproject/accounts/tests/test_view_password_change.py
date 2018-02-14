@@ -1,3 +1,22 @@
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.forms import PasswordResetForm
+from django.contrib.auth.models import User
+from django.core import mail
+from django.urls import resolve, reverse
+from django.test import TestCase
+
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode
+from django.contrib.auth.forms import SetPasswordForm
+
+class LoginRequiredPasswordChangeTests(TestCase):
+    def test_redirection(self):
+        url = reverse('password_change')
+        login_url = reverse('login')
+        response = self.client.get(url)
+        self.assertRedirects(response, f'{login_url}?next={url}')
+
 class PasswordChangeTestCase(TestCase):
     def setUp(self, data={}):
         self.user = User.objects.create_user(username='john', email='john@doe.com', password='old_password')

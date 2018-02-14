@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '%kqyx5fsx7gmjs(53j6@x3tr#+3w%z4qksy%d3qxvzqbq+s)yx'
+SECRET_KEY = '_-7v9=e3x&q++q99xb4y&!@4h!7+^@yqw-h*0lo8y#$&3$dmhw'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -37,11 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
+    'django.contrib.humanize',
     'widget_tweaks',
-
-    'accounts',
     'boards',
+    'accounts'
 ]
 
 MIDDLEWARE = [
@@ -126,14 +125,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'home'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
 
 LOGOUT_REDIRECT_URL = 'home'
+LOGIN_REDIRECT_URL = 'home'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 LOGIN_URL = 'login'
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
